@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  root to: "home#show"
+  root to: "posts#index"
   get 'dashboard', to: 'home#dashboard'
   get 'accepted_responses', to: 'home#accepted_responses'
   get 'responses', to: 'home#responses'
@@ -11,6 +11,14 @@ Rails.application.routes.draw do
   get 'signin-facebook', to: 'users/omniauth_callbacks#facebook'
   get 'access_restricted', to: 'home#access_restricted'
 
+  resources :posts, controller: 'posts' do
+    put :upvote, on: :member
+    put :downvote, on: :member
+    resources :comments, controller: 'posts/comments' do
+      put :upvote, on: :member
+      put :downvote, on: :member
+    end
+  end
   resources :users do
     get :connections, on: :collection
     resources :responses do

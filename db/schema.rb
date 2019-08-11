@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201906231527520700) do
+ActiveRecord::Schema.define(version: 2019_08_11_033407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "acls", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "user_type"
-    t.string "action"
-    t.string "state"
-    t.string "object_type"
-  end
 
   create_table "affiliations", force: :cascade do |t|
     t.string "name"
@@ -36,11 +28,6 @@ ActiveRecord::Schema.define(version: 201906231527520700) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "answers_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "answer_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -80,7 +67,7 @@ ActiveRecord::Schema.define(version: 201906231527520700) do
     t.string "image_content_type"
     t.bigint "image_file_size"
     t.datetime "image_updated_at"
-    t.string "type"
+    t.string "title"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -99,13 +86,6 @@ ActiveRecord::Schema.define(version: 201906231527520700) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "group_id"
-  end
-
-  create_table "site_settings", force: :cascade do |t|
-    t.string "name"
-    t.text "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -12,25 +12,31 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    .nav-bar
-      - if current_user
-        .pull-right
-          = link_to current_user.name || current_user.email, connections_users_path
-          .unseen-mark.d-none
-        .pull-right
-          = link_to "groups", groups_path
-        .pull-right
-          = link_to "questions", '/dashboard'
-      - else
-        .pull-right
-          = link_to "Sign in", new_user_session_path
-        .pull-right
-          = link_to "Sign up", new_user_registration_path
-      .pull-right{class: controller_name + action_name == 'homeshow' ? 'd-none' : ''}
-        = link_to 'home', '/'
-      .clearfix
-    .common-bg{class: "#{controller_name}-#{action_name}"}
-      - if flash[:notice].present?
-        .flash
-          = flash[:notice]
-      = yield
+    .page.col-lg-9.col-sm-9.col-12
+      .banner{style: 'background-image: url("https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg")'}
+        .banner-overlay
+          .banner-top
+          .banner-heading
+            Need HELP!!
+          .banner-site-description
+            Non Profit Organisation
+      
+      .nav-bar
+        - if current_user
+          .pull-right
+            = link_to current_user.name || current_user.email, connections_users_path
+          .pull-right
+            = link_to "posts", '/posts'
+        - else
+          .pull-right
+            = link_to "Sign in", new_user_session_path
+          .pull-right
+            = link_to "Sign up", new_user_registration_path
+        .pull-right{class: controller_name + action_name == 'homeshow' ? 'd-none' : ''}
+          = link_to 'home', '/'
+        .clearfix
+      .common-bg{class: "#{controller_name}-#{action_name}"}
+        - if flash[:notice].present?
+          .flash
+            = flash[:notice]
+        = yield

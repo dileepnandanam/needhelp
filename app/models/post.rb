@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :post_user, class_name: 'User', optional: true
   belongs_to :user
-  belongs_to :group
+  belongs_to :group, optional: true
   has_many :votes
   has_many :comments
 
