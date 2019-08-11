@@ -2,11 +2,12 @@ $(document).on('turbolinks:load', function() {
 	$('.new-group-post').on('ajax:success', function(e) {
 		new_post = $('.new-post')
 		$('.new-post').html(e.detail[2].responseText)
-		$(new_post).find('.post-form').ajaxForm(function(e) {
-			$('.posts').prepend(e)
+		$(new_post).find('.post-form').on('ajax:success', function(e, data, status, xhr) {
+			$('.posts').prepend(e.detail[2].responseText)
 		    $('.post-form').remove()
 		})
-		$(new_post).find('.open-image-upload').on('click', function() {
+		$(new_post).find('.open-image-upload').on('click', function(e) {
+			e.preventDefault()
 			$(this).siblings('.image-upload').removeClass('d-none')
 		})
 	})
@@ -37,5 +38,9 @@ $(document).on('turbolinks:load', function() {
     $('.questions-container').on('ajax:success', '.post > div > .expand-comment', function(e) {
     	$($(this).closest('.post').find('.comments-container')[0]).html(e.detail[2].responseText)
     	$($(this).closest('.post').find('.comments-container')[0]).removeClass('d-none')
+    })
+
+    $('.questions-container').on('ajax:success', '.view-more', function(e, data, status, xhr) {
+    	$(this).replaceWith(e.detail[2].responseText)
     })
 })

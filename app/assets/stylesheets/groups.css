@@ -61,11 +61,24 @@
   margin-right: 12px !important;
   display: inline-block;
   border-radius: 3px;
+  color: white;
+  margin-bottom: 12px;
+}
+.comment-actions a:hover {
+	color: black;
 }
 .comment-actions {
 	margin-top: 12px;
-	margin-bottom: 12px;
 }
 .cast-vote {
   background: blue;
+}
+.new-group-post {
+	display: none;
+}
+.new-group-post:first-child {
+	display: block;
+}
+.image-upload label {
+	display: none;
 }

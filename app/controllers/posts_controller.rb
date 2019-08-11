@@ -5,8 +5,12 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.order('created_at DESC').paginate(per_page: 2, page: params[:page])
-    render 'index'
+    @posts = Post.order('created_at DESC').paginate(per_page: 12, page: params[:page])
+    if request.format.html?
+      render 'index'
+    else
+      render 'posts', layout: false
+    end
   end
 
   def new
@@ -16,7 +20,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params.merge(user_id: current_user.id))
-    binding.pry
     if(@post.save)
       render 'post', layout: false
     else 
