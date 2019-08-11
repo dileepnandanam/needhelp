@@ -1,0 +1,9 @@
+.post
+  .pull-left.user-details
+    = image_tag post.post_user.image
+    = post.post_user.name.split(' ').first
+  .post-body.pull-left
+    = post.text
+  .clearfix
+  - if [post.post_user, post.user].include?(current_user)
+    = link_to 'delete', user_post_path(post.user, post), method: 'delete', class: 'delete-post', remote: true

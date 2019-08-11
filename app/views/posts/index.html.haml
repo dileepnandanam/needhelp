@@ -1,0 +1,9 @@
+%h4.white
+  = "#{@user.name}'s wall"
+.posts
+  - @posts.each do |p|
+    = render partial: 'post', locals: {post: p}
+.new-post
+  = simple_form_for([@user, Post.new], remote: true) do |f|
+    = f.input :text, label: false
+    = f.submit 'paste', class: 'btn-primary'
